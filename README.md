@@ -2,17 +2,18 @@
 
 *Fast offline city-scoped reverse geocoding*
 
-## Setup
+## Usage
 
 ```bash
-# install dependencies
-bun install
+# install package
+yarn add geodecode
+```
 
-# test the app
-bun test
+```typescript
+import { nearest } from 'geodecode'
 
-# build the app, available under dist
-bun run build
+const coord = { latitude: -18.38446, longitude: -55.36554 }
+const nearestCities = nearest(coord, 5)
 ```
 
 ## License

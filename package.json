@@ -1,37 +1,37 @@
 {
   "name": "geodecode",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "Fast offline city-scoped reverse geocoding",
+  "type": "module",
   "scripts": {
-    "build": "bun run build.mjs",
-    "prepublishOnly": "bun run build",
-    "dev": "bun run ./src/index.ts",
-    "populate": "bun run ./src/scripts/init.ts"
+    "build": "tsc",
+    "dev": "ts-node ./src/index.ts",
+    "populate": "ts-node ./src/scripts/init.ts"
   },
-  "files": [
-    "dist"
-  ],
   "keywords": [
-    "bun"
+    "reverse",
+    "geocoding",
+    "offline",
+    "typescript"
   ],
   "license": "MIT",
   "homepage": "https://github.com/devanjith/geodecode#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/devanjith/geodecode.git"
-  },
+  "repository": "git+https://github.com/devanjith/geodecode.git",
   "bugs": "https://github.com/devanjith/geodecode/issues",
   "author": "Devanjith de Silva <devzdesilva@gmail.com>",
   "devDependencies": {
     "@types/adm-zip": "^0.5.3",
-    "bun-plugin-dts": "^0.2.1",
-    "bun-types": "^1.0.7",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "adm-zip": "^0.5.10",
     "kdt": "^0.1.0"
-  }
+  },
+  "packageManager": "yarn@4.0.1",
+  "files": [
+    "dist"
+  ]
 }

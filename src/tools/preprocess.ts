@@ -21,6 +21,5 @@ export const downloadCities = async (citiesUrl: string, outputPath: string) => {
         countryCode: lineData[8]
       }
     })
-  const outputFile = Bun.file(outputPath)
-  outputFile.writer().write(JSON.stringify(cities))
+  return cities
 }

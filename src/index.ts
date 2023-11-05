@@ -1,6 +1,7 @@
 import { citiesJsonPath, citiesUrl } from './config'
-import { CachedData, City, Coord } from './models'
+import { CachedData, City, CityKdTree, Coord } from './models'
 import { downloadCities } from './tools/preprocess'
+//@ts-ignore
 import * as kdt from 'kdt'
 
 const cache: CachedData = {
@@ -8,19 +9,16 @@ const cache: CachedData = {
 }
 
 export const nearest = async (coordinates: Coord, count: number = 1) => {
-  await initKdTree()
-  if (cache.kdTree !== undefined)
-    return cache.kdTree.nearest(coordinates, count)
-  throw Error('k-d tree is not initialized')
+  if (cache.kdTree === undefined) {
+    cache.kdTree = await initKdTree()
+  }
+  return cache.kdTree.nearest(coordinates, count)
 }
 
 const distance = (a: City, b: City) =>
   Math.pow(a.latitude - b.latitude, 2) + Math.pow(a.longitude - b.longitude, 2)
 
-const initKdTree = async () => {
-  if (cache.kdTree !== undefined) return
-  if (!(await Bun.file(citiesJsonPath).exists()))
-    await downloadCities(citiesUrl, citiesJsonPath)
-  const cities: City[] = JSON.parse(await Bun.file(citiesJsonPath).text())
-  cache.kdTree = kdt.createKdTree(cities, distance, ['latitude', 'longitude'])
+const initKdTree = async (): Promise<CityKdTree<City, number>> => {
+  const cities = await downloadCities(citiesUrl, citiesJsonPath)
+  return kdt.createKdTree(cities, distance, ['latitude', 'longitude'])
 }

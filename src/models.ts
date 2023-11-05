@@ -13,5 +13,5 @@ export type CityKdTree<T extends Coord, R> = {
 }
 
 export type CachedData = {
-  kdTree: CityKdTree<City, number> | undefined // TODO: Add and import kdt types from 'kdt'.
+  kdTree?: CityKdTree<City, number> // TODO: Add and import kdt types from 'kdt'.
 }
