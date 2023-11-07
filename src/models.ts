@@ -9,7 +9,7 @@ export type City = {
 } & Coord
 
 export type CityKdTree<T extends Coord, R> = {
-  nearest: (coord: Coord, count: number) => [T[], R]
+  nearest: (coord: Coord, count: number) => [T, R][]
 }
 
 export type CachedData = {

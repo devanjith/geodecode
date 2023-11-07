@@ -1,7 +1,7 @@
 import AdmZip from 'adm-zip'
 import { City } from '../models'
 
-export const downloadCities = async (citiesUrl: string, outputPath: string) => {
+export const downloadCities = async (citiesUrl: string) => {
   const response = await fetch(citiesUrl)
   const zip = new AdmZip(
     Buffer.from(await (await response.blob()).arrayBuffer())
