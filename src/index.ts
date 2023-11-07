@@ -11,9 +11,7 @@ export const nearest = async (coordinates: Coord, count: number = 1) => {
   if (cache.kdTree === undefined) {
     cache.kdTree = await initKdTree()
   }
-  return cache.kdTree
-    .nearest(coordinates, count)
-    .toSorted((a, b) => a[1] - b[1])
+  return cache.kdTree.nearest(coordinates, count).sort((a, b) => a[1] - b[1])
 }
 
 const distance = (a: City, b: City) =>
